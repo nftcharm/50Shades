@@ -117,7 +117,6 @@ function updateTimer() {
   if (this.timeLeft <= 0) {
     this.timeLeft = 0;
     this.timerEvent.remove();
-    alert('Game Over!');
     player.setVisible(false);
 
     generatePixelArt.call(this, this.score);
