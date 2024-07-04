@@ -26,9 +26,9 @@ let coinSound;
 let powerUpSpeed;
 let backgroundMusic;
 let timeLeft = 60;
-let blueCoinCount = 72;
-let redCoinCount = 18;
-let greenCoinCount = 42;
+let blueCoinCount = 0;
+let redCoinCount = 0;
+let greenCoinCount = 0;
 let blueCoinIncrease = 1
 let greenCoinIncrease = 3
 let redCoinIncrease = 6
@@ -136,6 +136,7 @@ function updateTimer() {
 // }
 
 function spawnCoinOfType(coinType, displaySize, lifetime, scoreIncrement, bonusTime, destroy = true) {
+  console.log(coinType, destroy)
   const x = Phaser.Math.Between(0, window.innerWidth);
   const y = Phaser.Math.Between(0, window.innerHeight);
 
@@ -156,7 +157,7 @@ function spawnCoinOfType(coinType, displaySize, lifetime, scoreIncrement, bonusT
 }
 
 function spawnCoin() {
-  spawnCoinOfType.call(this, "coin", { width: 60, height: 80 }, 9000, 1, 1, blueCoinIncrease);
+  spawnCoinOfType.call(this, "coin", { width: 60, height: 80 }, 9000, 1, blueCoinIncrease, false);
 }
 
 function spawnGreenCoin() {
@@ -164,7 +165,7 @@ function spawnGreenCoin() {
 }
 
 function spawnRedCoin() {
-  spawnCoinOfType.call(this, "redCoin", { width: 60, height: 80 }, 4500, 8, redCoinIncrease);
+  spawnCoinOfType.call(this, "redCoin", { width: 60, height: 80 }, 4500, 6, redCoinIncrease);
 }
 
 function scheduleFunction(delay, callback) {
@@ -189,7 +190,7 @@ function spawnPowerUpSpeed() {
   }
 
   powerUpSpeed = this.physics.add.sprite(x, y, "powerUpSpeed");
-  powerUpSpeed.setDisplaySize(100, 100);
+  powerUpSpeed.setDisplaySize(150, 135);
 
   this.physics.add.overlap(player, powerUpSpeed, collectPowerUpSpeed, null, this);
 
